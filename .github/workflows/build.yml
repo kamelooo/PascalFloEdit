@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'  # تأكد من استخدام إصدار Java المدعوم
+          distribution: 'temurin'  # حدد نوع التوزيع (يمكنك استخدام temurin أو zulu أو غيره)
 
       - name: Install Free Pascal Compiler
         run: |
