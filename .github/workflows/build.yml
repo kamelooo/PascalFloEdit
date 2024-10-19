@@ -3,38 +3,38 @@ name: Build Android APK
 on:
   push:
     branches:
-      - main  # يمكنك تغييرها إذا كنت تستخدم فرعًا مختلفًا
+      - main  # يمكنك تغييره إذا كنت تستخدم فرعًا مختلفًا
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      
+        uses: actions/checkout@v3  # تحديث checkout إلى الإصدار v3
+
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3  # تحديث setup-java إلى الإصدار v3
         with:
-          java-version: '11'  # تأكد من استخدام إصدار Java المدعوم
-          distribution: 'temurin'  # حدد نوع التوزيع (يمكنك استخدام temurin أو zulu أو غيره)
+          java-version: '11'  # تأكد من أن إصدار Java هو 11
+          distribution: 'temurin'  # حدد توزيع JDK (temurin) الذي يدعمه GitHub Actions
 
       - name: Install Free Pascal Compiler
         run: |
           sudo apt-get update
-          sudo apt-get install -y fpc
+          sudo apt-get install -y fpc  # تثبيت Free Pascal Compiler
 
       - name: Build APK
         run: |
-          cd PascalFloEdit  # تأكد من أن هذا هو المسار الصحيح لمجلد المصدر
-          fpc -Mdelphi MainActivity.pas
+          cd PascalFloEdit  # تأكد من أن هذا هو المسار الصحيح لمجلد المشروع
+          fpc -Mdelphi MainActivity.pas  # بناء مشروع Pascal
 
       - name: Archive APK
         run: |
           mkdir output
-          mv *.apk output/
-      
+          mv *.apk output/  # نقل ملف APK النهائي إلى مجلد output
+
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3  # تحديث upload-artifact إلى الإصدار v3
         with:
-          name: MyApp
-          path: output/*.apk
+          name: MyApp  # اسم التطبيق
+          path: output/*.apk  # مسار ملف APK النهائي
