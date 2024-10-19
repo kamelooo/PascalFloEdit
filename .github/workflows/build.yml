@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      
       - name: Set up Java
         uses: actions/setup-java@v1
         with:
@@ -31,9 +31,9 @@ jobs:
         run: |
           mkdir output
           mv *.apk output/
-
+      
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: MyApp
           path: output/*.apk
