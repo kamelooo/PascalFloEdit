@@ -1,1 +1,40 @@
 
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main  # يمكنك تغييرها إذا كنت تستخدم فرعًا مختلفًا
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'  # تأكد من استخدام إصدار Java المدعوم
+
+      - name: Install Free Pascal Compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fpc
+
+      - name: Build APK
+        run: |
+          cd PascalFloEdit  # تأكد من أن هذا هو المسار الصحيح لمجلد المصدر
+          fpc -Mdelphi MainActivity.pas
+
+      - name: Archive APK
+        run: |
+          mkdir output
+          mv *.apk output/
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: MyApp
+          path: output/*.apk
