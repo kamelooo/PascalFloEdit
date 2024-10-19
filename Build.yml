@@ -24,7 +24,7 @@ jobs:
 
       - name: Build APK
         run: |
-          cd path_to_your_source_code  # قم بتغيير هذا إلى المسار الصحيح
+          cd PascalFloEdit  # تغيير إلى المجلد الذي يحتوي على ملفات المصدر
           fpc -Mdelphi MainActivity.pas
 
       - name: Archive APK
